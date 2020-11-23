@@ -14,6 +14,14 @@ public class VertexTest : MonoBehaviour
 
     public List<GameObject> points;
     public GameObject toBeIstantiated;
+
+    void AddSpring(int i0, int i1)
+    {
+        SpringJoint2D sj = points[i0].AddComponent<SpringJoint2D>();
+        sj.connectedBody = points[i1].GetComponent<Rigidbody2D>();
+        sj.autoConfigureConnectedAnchor = true;
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,11 +31,36 @@ public class VertexTest : MonoBehaviour
 
         for(int i=0; i<vertices.Length; i++)
         {
-            GameObject childObject = Instantiate(toBeIstantiated, gameObject.transform.position + vertices[i], Quaternion.identity);
+            Vector2 pos = new Vector2(mesh.vertices[i].x, mesh.vertices[i].y);
+            pos = transform.TransformPoint(pos);
+            GameObject childObject = Instantiate(toBeIstantiated, pos, Quaternion.identity);
             childObject.transform.parent = gameObject.transform;
             points.Add(childObject);
         }
+        /*
+        for(int i=0; i<points.Count; i++)
+        {
+            Vector2 pos0 = points[i].transform.position;
 
+            for(int j=0; j<points.Count; j++)
+            {
+                if (i == j)
+                    continue;
+
+                Vector2 pos1 = points[j].transform.position;
+
+                if((pos0 - pos1).magnitude < 1.0f)
+                {
+                    AddSpring(i, j);
+                }
+            }
+        }
+        */
+
+
+
+
+        
         for(int i=0; i<points.Count; i++)
         {
             if (i == points.Count - 1)
@@ -35,6 +68,9 @@ public class VertexTest : MonoBehaviour
             else
             points[i].GetComponent<HingeJoint2D>().connectedBody = points[i+1].GetComponent<Rigidbody2D>();
         }
+     
+        transform.position = Vector2.zero;
+
 
     }
 
@@ -42,6 +78,9 @@ public class VertexTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
 
         for (int i = 0; i < vertices.Length; i++)
         {
