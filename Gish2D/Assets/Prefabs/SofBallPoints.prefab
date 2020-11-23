@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5087564943950628440}
   - component: {fileID: -123758896347877046}
   - component: {fileID: 8979943876949441274}
+  - component: {fileID: 4038329905110782046}
   m_Layer: 0
   m_Name: SofBallPoints
   m_TagString: Untagged
@@ -49,7 +50,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.1
 --- !u!50 &5087564943950628440
 Rigidbody2D:
   serializedVersion: 4
@@ -109,3 +110,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpPower: 5
+--- !u!231 &4038329905110782046
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9187530434904150670}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 1
+  m_DampingRatio: 0
+  m_Frequency: 1

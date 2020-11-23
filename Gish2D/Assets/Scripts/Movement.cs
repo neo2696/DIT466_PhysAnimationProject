@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        /*
         if (Input.GetKey(KeyCode.UpArrow))
             rb.AddForce(new Vector2(0, 5));
 
@@ -30,24 +30,24 @@ public class Movement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.RightArrow))
             rb.AddForce(new Vector2(5, 0));
+        */
 
-
-        /*
+ 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(x, y);
         Run(direction);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
 
             Jump(Vector2.up);
 
         }
-        */
+        
     }
 
-    /*
+    
     public void Run(Vector2 dir)
     {
 
@@ -60,5 +60,5 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpPower;
     }
-    */
+    
 }
