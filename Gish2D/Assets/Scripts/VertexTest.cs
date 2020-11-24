@@ -11,8 +11,26 @@ public class VertexTest : MonoBehaviour
 
 
 
-     public List<GameObject> points;
+    public List<GameObject> points;
     public GameObject toBeIstantiated;
+
+    void AddSpring(int i0, int i1)
+    {
+        SpringJoint2D sj = points[i0].AddComponent<SpringJoint2D>();
+        sj.connectedBody = points[i1].GetComponent<Rigidbody2D>();
+        sj.autoConfigureConnectedAnchor = true;
+        sj.dampingRatio = 1;        
+        sj.frequency = 10;      //stiffness
+    }
+
+    void AddHinge(int i0, int i1)
+    {
+        HingeJoint2D hj = points[i0].AddComponent<HingeJoint2D>();
+        hj.connectedBody = points[i1].GetComponent<Rigidbody2D>();
+        hj.autoConfigureConnectedAnchor = true;
+      //  hj.useLimits = true;
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,24 +47,23 @@ public class VertexTest : MonoBehaviour
             points.Add(childObject);
         }
 
-
+        
         for (int i = 0; i < points.Count; i++)
         {
-           // if (i != CenterPoint)
+            Vector3 pos0 = points[i].transform.position;
+            for (int j = 0; j < points.Count; j++)
             {
-                if (i == points.Count - 1)
                 {
-                    points[i].GetComponent<SpringJoint2D>().connectedBody = points[0].GetComponent<Rigidbody2D>();
-                    points[i].GetComponent<HingeJoint2D>().connectedBody = points[0].GetComponent<Rigidbody2D>();
-                }
-                else
-                {
-                    points[i].GetComponent<SpringJoint2D>().connectedBody = points[i + 1].GetComponent<Rigidbody2D>();
-                    points[i].GetComponent<HingeJoint2D>().connectedBody = points[i + 1].GetComponent<Rigidbody2D>();
+                    if (i == j)
+                        continue;
+                    Vector3 pos1 = points[j].transform.position;
+                    if (((pos0 - pos1).magnitude < 0.8f))
+                    {
+                        AddSpring(i,j);
+                    }
                 }
             }
         }
-     
         transform.position = Vector2.zero;
 
 
@@ -65,7 +82,5 @@ public class VertexTest : MonoBehaviour
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-
-
     }
 }

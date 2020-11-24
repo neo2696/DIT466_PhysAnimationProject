@@ -18,21 +18,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKey(KeyCode.UpArrow))
-            rb.AddForce(new Vector2(0, 5));
-
-        if (Input.GetKey(KeyCode.DownArrow))
-            rb.AddForce(new Vector2(0, -5));
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-            rb.AddForce(new Vector2(-5, 0));
-
-        if (Input.GetKey(KeyCode.RightArrow))
-            rb.AddForce(new Vector2(5, 0));
-        */
-
- 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(x, y);
@@ -42,7 +27,6 @@ public class Movement : MonoBehaviour
         {
 
             Jump(Vector2.up);
-
         }
         
     }
