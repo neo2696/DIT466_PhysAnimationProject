@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
     public float speed = 5;
     private Rigidbody2D rb;
     public float jumpPower;
-
+    bool triggerEntered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +23,37 @@ public class Movement : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(x, y);
         Run(direction);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        Debug.Log(triggerEntered);
+        if (Input.GetKeyDown(KeyCode.Space) )
         {
-
             Jump(Vector2.up);
         }
         
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.name == "Tilemap")
+        {
+            triggerEntered = true;
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+
+        if(collision.CompareTag("Floor") )
+        {
+            triggerEntered = true;
+        }
+    }
+
+
     public void Run(Vector2 dir)
     {
 
