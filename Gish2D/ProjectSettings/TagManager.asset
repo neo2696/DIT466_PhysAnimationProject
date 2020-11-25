@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Enemy
   - Floor
-  - Coin
-  - GameMaster
   layers:
   - Default
   - TransparentFX
