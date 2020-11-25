@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -10,15 +9,11 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     public float jumpPower;
     bool triggerEntered = false;
-    private GameMaster gm;
-
-    //Inspector variables
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
     }
 
     // Update is called once per frame
@@ -31,7 +26,6 @@ public class Movement : MonoBehaviour
         Debug.Log(triggerEntered);
         if (Input.GetKeyDown(KeyCode.Space) )
         {
-            GameObject.Find("Jump").GetComponent<AudioSource>().Play();
             Jump(Vector2.up);
         }
         
@@ -50,22 +44,15 @@ public class Movement : MonoBehaviour
     {
         if(collision.CompareTag("Enemy"))
         {
-            GameObject.Find("Death").GetComponent<AudioSource>().Play();
-            Movement.GishDied();
+            SceneManager.LoadScene("SampleScene");
         }
 
         if(collision.CompareTag("Floor") )
         {
             triggerEntered = true;
         }
-
-        if (collision.CompareTag("Coin"))
-        {
-            GameObject.Find("CoinSound").GetComponent<AudioSource>().Play();
-            Destroy(collision.gameObject);
-            gm.points += 1;
-        }
     }
+
 
     public void Run(Vector2 dir)
     {
@@ -79,10 +66,5 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpPower;
     }
-
-    public static void GishDied()
-    {
-        GameOverWindow.ShowStatic();
-    }
-  
+    
 }
