@@ -7,21 +7,22 @@ using CodeMonkey.Utils;
 
 public class GameOverWindow : MonoBehaviour
 {
-    //private Text scoreText;
     private static GameOverWindow instance;
-
-    //public Text text;
+    private GameMaster gm;
+    public Text text;
 
     private void Awake()
     {
-        //scoreText = transform.Find("scoreText").GetComponent<Text>();
         instance = this;
-
-        transform.Find("Retry").GetComponent<Button_UI>().ClickFunc = () => {
-            SceneManager.LoadScene("SampleScene");
-        };
+        gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
+        transform.Find("Retry").GetComponent<Button_UI>().ClickFunc = () => {SceneManager.LoadScene("SampleScene");};
 
         Hide();
+    }
+
+    public void Update()
+    {
+        text = gm.pointsText;
     }
 
     private void Show()

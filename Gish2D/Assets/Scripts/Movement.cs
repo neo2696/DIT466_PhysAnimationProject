@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
         {
             GameObject.Find("CoinSound").GetComponent<AudioSource>().Play();
             Destroy(collision.gameObject);
-            gm.points += 1; 
+            gm.points += 1;
         }
     }
 

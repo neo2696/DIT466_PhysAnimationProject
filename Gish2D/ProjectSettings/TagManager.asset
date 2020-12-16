@@ -9,6 +9,9 @@ TagManager:
   - Coin
   - GameMaster
   - Mouse
+  - Wall Left End
+  - Wall Right End
+  - Final SCore
   layers:
   - Default
   - TransparentFX
